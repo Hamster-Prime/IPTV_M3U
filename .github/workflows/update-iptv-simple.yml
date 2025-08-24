@@ -1,0 +1,68 @@
+name: 自动更新 IPTV 精简源
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update-playlist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download latest IPTV m3u file
+        run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
+
+      - name: Create output directory
+        run: mkdir -p m3u
+
+      - name: Update playlist from template
+        run: |
+          TEMPLATE_FILE="iptv_template/IPTV_Template.m3u"
+          OUTPUT_FILE="m3u/IPTV_Simple.m3u"
+          DOWNLOADED_FILE="downloaded_iptv.m3u"
+          NEW_LINKS_FILE="new_links.txt"
+          
+          if [ ! -f "$TEMPLATE_FILE" ]; then
+            echo "Error: Template file '$TEMPLATE_FILE' not found."
+            exit 1
+          fi
+
+          grep '^http' "$DOWNLOADED_FILE" > "$NEW_LINKS_FILE"
+
+          mapfile -t new_urls < "$NEW_LINKS_FILE"
+          new_url_index=0
+          
+          TEMP_OUTPUT_FILE=$(mktemp)
+
+          while IFS= read -r line || [[ -n "$line" ]]; do
+            if [[ $line == http* ]]; then
+              if [ $new_url_index -lt ${#new_urls[@]} ]; then
+                echo "${new_urls[$new_url_index]}" >> "$TEMP_OUTPUT_FILE"
+                ((new_url_index++))
+              else
+                echo "$line" >> "$TEMP_OUTPUT_FILE"
+              fi
+            else
+              echo "$line" >> "$TEMP_OUTPUT_FILE"
+            fi
+          done < "$TEMPLATE_FILE"
+
+          mv "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE"
+          echo "Playlist updated and saved to $OUTPUT_FILE"
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git add m3u/IPTV_Simple.m3u
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit. Working tree clean."
+          else
+            git commit -m "Update IPTV playlist (m3u/IPTV_Simple.m3u)"
+            git push
+          fi
