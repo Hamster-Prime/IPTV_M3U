@@ -1,39 +1,24 @@
-# GitHub Actions workflow 文件
-# 文件名: .github/workflows/update-iptv.yml
-
 name: 自动更新 IPTV 源
 
 on:
-  # 允许手动触发
   workflow_dispatch:
-  # 定时任务，使用 cron 表达式
-  # 这里的 '0 18 * * *' 是 UTC 时间，对应北京时间 (UTC+8) 的凌晨 2 点
   schedule:
-    - cron: '0 18 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   update-iptv:
-    # 使用最新版的 ubuntu 运行环境
     runs-on: ubuntu-latest
 
-    # --- 新增内容开始 ---
-    # 增加权限设置，允许 workflow 对仓库进行写操作
     permissions:
       contents: write
-    # --- 新增内容结束 ---
 
     steps:
-      # 第一步：检出你的仓库代码，这样才能提交更改
       - name: 检出仓库代码
         uses: actions/checkout@v3
 
-      # 第二步：下载、处理并保存 m3u 文件
       - name: 下载并处理 IPTV 文件
         run: |
-          # 下载原始 m3u 文件
           curl -s -o original.m3u https://sub.ottiptv.cc/iptv.m3u
-
-          # 删除指定的行
           grep -v -F \
           -e '#EXTINF:-1 tvg-name="4K60PSDR-H264-AAC测试" tvg-logo="https://cdn.jsdelivr.net/gh/feiyang666999/testvideo/tg.jpg" group-title="4K频道",4K60PSDR-H264-AAC测试' \
           -e 'https://cdn.jsdelivr.net/gh/feiyang666999/testvideo/sdr4kvideo/playlist.m3u8' \
@@ -46,34 +31,19 @@ jobs:
           -e '#EXTINF:-1,tvg-id="中国教育1台" tvg-name="中国教育1台" tvg-logo="https://11.112114.xyz/logo/中国教育1台.png" group-title="其他",中国教育电视台-MCP' \
           -e 'https://mursor.ottiptv.cc/mcp/cetv1.m3u8' \
           original.m3u > IPTV.m3u
-
-          # 创建 m3u 目录（如果不存在）
           mkdir -p m3u
-
-          # 将处理后的文件移动到 m3u 目录
           mv IPTV.m3u m3u/IPTV.m3u
-
-          # 清理临时文件
           rm original.m3u
 
-      # 第三步：提交更改到仓库
       - name: 提交并推送文件
         run: |
-          # 配置 git 用户
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          
-          # 添加更改并检查是否有变动
           git add m3u/IPTV.m3u
-          
-          # 如果有变动则提交，没有变动则不执行
           if git diff --staged --quiet; then
             echo "没有检测到文件变动，无需提交。"
           else
-            # --- 修改内容开始 ---
-            # 修正了 date 命令的语法，并使用 $(...) 代替旧的 `...` 写法
             git commit -m "chore: 自动更新 IPTV源 ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
-            # --- 修改内容结束 ---
             git push
           fi
 
