@@ -1,4 +1,4 @@
-name: Update IPTV Playlist
+name: 自动更新 IPTV 精简源
 
 on:
   workflow_dispatch: # 允许手动触发
