@@ -19,74 +19,101 @@ jobs:
       contents: write
 
     steps:
-      # 第一步：检出仓库代码，以便访问模板文件并提交更改
+      # 第一步：检出仓库代码
       - name: 检出仓库代码
         uses: actions/checkout@v4
 
       # 第二步：下载最新的 IPTV 源文件
       - name: 下载源 IPTV 文件
-        run: curl -s -o source.m3u https://sub.ottiptv.cc/iptv.m3u
+        run: curl -s -L -o source.m3u https://sub.ottiptv.cc/iptv.m3u
 
-      # 第三步：核心步骤，使用 awk 脚本根据模板生成新的 IPTV 文件
-      - name: 根据模板生成 IPTV 文件
+      # 第三步：核心步骤，使用增强版 awk 脚本进行模糊匹配和生成
+      - name: 根据模板模糊匹配生成 IPTV 文件
         run: |
           # 确保输出目录存在
           mkdir -p m3u
 
           # 使用 awk 脚本进行处理
-          # 脚本逻辑：
-          # 1. 首先读取 source.m3u 文件，将 "频道名" 和 "URL" 的对应关系存入一个名为 urls 的数组。
-          # 2. 然后读取模板文件 IPTV_Template.m3u。
-          # 3. 遍历模板文件，当遇到一个频道时，就去 urls 数组里查找新的 URL。
-          # 4. 如果找到了，就用新的 URL 替换掉模板中的旧 URL；如果没找到，就保留原来的。
           awk '
-            # BEGIN 块在处理任何文件之前运行，这里用来设置分隔符
+            # 定义一个函数来“标准化”频道名称，用于模糊匹配
+            function normalize(name) {
+              # 创建一个局部变量 s，赋值为传入的 name
+              s = name
+              # 1. 全部转为小写
+              s = tolower(s)
+              # 2. 移除所有空格、制表符、破折号和下划线
+              gsub(/[ \t\-_]/, "", s)
+              # 3. 移除常见的视频质量和频道类型后缀，以减少干扰
+              gsub(/hd|fhd|uhd|4k|高清|超清|标清|频道|综合/, "", s)
+              return s
+            }
+
+            # BEGIN 块在处理任何文件之前运行，这里用来设置字段分隔符
             BEGIN {
               FS = ","
             }
 
             # FNR==NR 这个条件只在读取第一个文件 (source.m3u) 时为真
+            # 这个阶段是：建立源数据的“标准化名称 -> URL”映射
             FNR==NR {
-              # 如果当前行是频道信息行 (#EXTINF)
               if ($0 ~ /^#EXTINF/) {
-                # 频道名是最后一个字段
-                channel_name = $NF
-                # 去除可能存在的前后空格
-                gsub(/^[ \t]+|[ \t]+$/, "", channel_name)
+                # 提取原始频道名 (最后一个字段)
+                original_name = $NF
                 # 读取下一行，即 URL
                 getline url
-                # 如果频道名不为空，就存入数组
-                if (channel_name != "") {
-                  urls[channel_name] = url
+                # 如果频道名和 URL 都不为空
+                if (original_name != "" && url != "") {
+                  # 将标准化后的名称作为 key，原始 URL作为 value 存入数组
+                  source_urls[normalize(original_name)] = url
                 }
               }
               # 跳过后续处理，继续读取 source.m3u 的下一行
               next
             }
-
-            # 这个块在处理第二个文件 (IPTV_Template.m3u) 时运行
+            
+            # 这个块在处理第二个文件 (iptv_template/IPTV_Template.m3u) 时运行
+            # 这个阶段是：遍历模板，查找并替换链接
             {
               # 如果当前行是频道信息行
               if ($0 ~ /^#EXTINF/) {
-                # 同样的方式获取频道名
-                channel_name = $NF
-                gsub(/^[ \t]+|[ \t]+$/, "", channel_name)
-                # 直接打印这行频道信息
+                # 打印这行频道信息头
                 print $0
+                
+                # 提取模板中的频道名
+                template_name = $NF
+                
                 # 读取下一行的占位 URL
                 getline placeholder_url
-                # 检查我们的数组里是否有这个频道的新 URL
-                if (channel_name in urls) {
-                  # 如果有，就打印新的 URL
-                  print urls[channel_name]
+
+                # 对模板频道名进行标准化
+                norm_template_name = normalize(template_name)
+                
+                # --- 模糊匹配逻辑开始 ---
+                best_match_key = ""
+                # 遍历所有源频道的标准化名称 (即 source_urls 数组的 key)
+                for (norm_source_name in source_urls) {
+                  # 如果标准化的源名称“包含”标准化的模板名称
+                  if (index(norm_source_name, norm_template_name)) {
+                    # 如果这是第一个匹配项，或者当前匹配项比上一个“更好”(更短，意味着更接近)
+                    if (best_match_key == "" || length(norm_source_name) < length(best_match_key)) {
+                      best_match_key = norm_source_name
+                    }
+                  }
+                }
+                # --- 模糊匹配逻辑结束 ---
+
+                # 如果找到了最佳匹配
+                if (best_match_key != "") {
+                  # 打印找到的 URL
+                  print source_urls[best_match_key]
                 } else {
-                  # 如果没有，就打印原来的占位 URL
+                  # 如果没找到，打印模板中原来的占位 URL
                   print placeholder_url
-                  # 在日志中打印一个警告，方便排查问题
-                  print "警告: 在源文件中未找到频道 [" channel_name "] 的链接" > "/dev/stderr"
+                  # 并输出一个警告日志，方便调试
+                  print "警告: 在源文件中未能模糊匹配到频道 [" template_name "]" > "/dev/stderr"
                 }
               } else {
-                # 如果不是频道信息行 (比如文件头)，直接打印
+                # 如果不是频道信息行 (比如文件头 #EXTM3U)，直接打印
                 print $0
               }
             }
