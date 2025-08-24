@@ -12,14 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: List files in the repository # <-- 新增的调试步骤
+      - name: List files in the repository
         run: ls -R
 
       - name: Download latest IPTV m3u file
         run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
 
       - name: Create output directory
-        run: mkdir -p m3u # 确保 m3u 文件夹存在
+        run: mkdir -p m3u
 
       - name: Update playlist from template
         run: |
@@ -35,8 +35,8 @@ jobs:
             exit 1
           fi
 
-          # 提取下载文件中的视频链接
-          grep '^http' "$DOWNLOADED_FILE" > "$NEW_LINKS_FILE"
+          # 提取下载文件中的视频链接，如果找不到也不报错
+          grep '^http' "$DOWNLOADED_FILE" > "$NEW_LINKS_FILE" || true
 
           # 读取新链接到数组中
           mapfile -t new_urls < "$NEW_LINKS_FILE"
