@@ -9,12 +9,15 @@ jobs:
   update-playlist:
     runs-on: ubuntu-latest
     steps:
+      # 第 1 步：下载代码
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 第 2 步：列出文件（用于调试）
       - name: List files in the repository
         run: ls -R
 
+      # 第 3 步：下载最新的 m3u 文件
       - name: Download latest IPTV m3u file
         run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
 
@@ -22,9 +25,11 @@ jobs:
       # === 关键修复：这是之前缺失的步骤，是导致错误的根本原因 ===
       # === 这个步骤必须在 "Update playlist" 步骤之前               ===
       # ====================================================================
+      # 第 4 步：创建输出目录
       - name: Create output directory
         run: mkdir -p m3u
 
+      # 第 5 步：运行更新脚本
       - name: Update playlist from template
         run: |
           # 脚本本身现在是完全正确的，无需再修改
@@ -61,6 +66,7 @@ jobs:
           mv "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE"
           echo "Playlist updated and saved to $OUTPUT_FILE"
 
+      # 第 6 步：提交并推送代码
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
