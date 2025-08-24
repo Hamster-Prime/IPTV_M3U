@@ -18,6 +18,7 @@ jobs:
       - name: Download latest IPTV m3u file
         run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
 
+      # 新增步骤：创建输出目录，确保 m3u 文件夹存在
       - name: Create output directory
         run: mkdir -p m3u
 
