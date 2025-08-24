@@ -1,140 +1,90 @@
-# GitHub Actions workflow 文件
-# 文件名: .github/workflows/generate-iptv.yml
-
 name: 自动更新 IPTV 精简源
 
 on:
-  # 允许手动触发
   workflow_dispatch:
-  # 定时任务，使用 cron 表达式
-  # '0 18 * * *' 是 UTC 时间，对应北京时间 (UTC+8) 的凌晨 2 点
   schedule:
     - cron: '0 18 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 授予 workflow 对仓库进行写操作的权限
     permissions:
       contents: write
 
     steps:
-      # 第一步：检出仓库代码
       - name: 检出仓库代码
         uses: actions/checkout@v4
 
-      # 第二步：下载最新的 IPTV 源文件
       - name: 下载源 IPTV 文件
         run: curl -s -L -o source.m3u https://sub.ottiptv.cc/iptv.m3u
 
-      # 第三步：核心步骤，使用增强版 awk 脚本进行模糊匹配和生成
       - name: 根据模板模糊匹配生成 IPTV 文件
         run: |
-          # 确保输出目录存在
           mkdir -p m3u
 
-          # 使用 awk 脚本进行处理
           awk '
-            # 定义一个函数来“标准化”频道名称，用于模糊匹配
             function normalize(name) {
-              # 创建一个局部变量 s，赋值为传入的 name
               s = name
-              # 1. 全部转为小写
               s = tolower(s)
-              # 2. 移除所有空格、制表符、破折号和下划线
               gsub(/[ \t\-_]/, "", s)
-              # 3. 移除常见的视频质量和频道类型后缀，以减少干扰
               gsub(/hd|fhd|uhd|4k|高清|超清|标清|频道|综合/, "", s)
               return s
             }
 
-            # BEGIN 块在处理任何文件之前运行，这里用来设置字段分隔符
             BEGIN {
               FS = ","
             }
-
-            # FNR==NR 这个条件只在读取第一个文件 (source.m3u) 时为真
-            # 这个阶段是：建立源数据的“标准化名称 -> URL”映射
             FNR==NR {
               if ($0 ~ /^#EXTINF/) {
-                # 提取原始频道名 (最后一个字段)
                 original_name = $NF
-                # 读取下一行，即 URL
                 getline url
-                # 如果频道名和 URL 都不为空
                 if (original_name != "" && url != "") {
-                  # 将标准化后的名称作为 key，原始 URL作为 value 存入数组
                   source_urls[normalize(original_name)] = url
                 }
               }
-              # 跳过后续处理，继续读取 source.m3u 的下一行
               next
             }
-            
-            # 这个块在处理第二个文件 (iptv_template/IPTV_Template.m3u) 时运行
-            # 这个阶段是：遍历模板，查找并替换链接
             {
-              # 如果当前行是频道信息行
               if ($0 ~ /^#EXTINF/) {
-                # 打印这行频道信息头
                 print $0
                 
-                # 提取模板中的频道名
                 template_name = $NF
                 
-                # 读取下一行的占位 URL
                 getline placeholder_url
 
-                # 对模板频道名进行标准化
                 norm_template_name = normalize(template_name)
                 
-                # --- 模糊匹配逻辑开始 ---
                 best_match_key = ""
-                # 遍历所有源频道的标准化名称 (即 source_urls 数组的 key)
                 for (norm_source_name in source_urls) {
-                  # 如果标准化的源名称“包含”标准化的模板名称
                   if (index(norm_source_name, norm_template_name)) {
-                    # 如果这是第一个匹配项，或者当前匹配项比上一个“更好”(更短，意味着更接近)
                     if (best_match_key == "" || length(norm_source_name) < length(best_match_key)) {
                       best_match_key = norm_source_name
                     }
                   }
                 }
-                # --- 模糊匹配逻辑结束 ---
 
-                # 如果找到了最佳匹配
                 if (best_match_key != "") {
-                  # 打印找到的 URL
                   print source_urls[best_match_key]
                 } else {
-                  # 如果没找到，打印模板中原来的占位 URL
                   print placeholder_url
-                  # 并输出一个警告日志，方便调试
                   print "警告: 在源文件中未能模糊匹配到频道 [" template_name "]" > "/dev/stderr"
                 }
               } else {
-                # 如果不是频道信息行 (比如文件头 #EXTM3U)，直接打印
                 print $0
               }
             }
-          ' source.m3u iptv_template/IPTV_Template.m3u > m3u/IPTV.m3u
+          ' source.m3u iptv_template/IPTV_Template.m3u > m3u/IPTV_Simple.m3u
 
-          echo "IPTV 文件已根据模板成功生成到 m3u/IPTV.m3u"
+          echo "IPTV 文件已根据模板成功生成到 m3u/IPTV_Simple.m3u"
 
-      # 第四步：将生成的文件提交到仓库
       - name: 提交并推送文件
         run: |
-          # 配置 git 用户信息
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          
-          # 将生成的文件添加到暂存区
-          git add m3u/IPTV.m3u
-          
-          # 检查是否有文件变动，只有在有变动时才执行提交
+          git add m3u/IPTV_Simple.m3u
           if git diff --staged --quiet; then
             echo "文件内容无变化，无需提交。"
           else
-            git commit -m "feat: 自动更新 IPTV 列表 ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
+            git commit -m "feat: 自动更新 IPTV 列表 (Simple) ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
             git push
           fi
