@@ -1,82 +1,113 @@
+# GitHub Actions workflow 文件
+# 文件名: .github/workflows/generate-iptv.yml
+
 name: 自动更新 IPTV 精简源
 
 on:
-  workflow_dispatch: # 允许手动触发
+  # 允许手动触发
+  workflow_dispatch:
+  # 定时任务，使用 cron 表达式
+  # '0 18 * * *' 是 UTC 时间，对应北京时间 (UTC+8) 的凌晨 2 点
   schedule:
-    - cron: '0 0 * * *' # 每天 UTC 时间 0 点运行 (北京时间早上8点)
+    - cron: '0 18 * * *'
 
 jobs:
-  update-playlist:
+  build:
     runs-on: ubuntu-latest
+    # 授予 workflow 对仓库进行写操作的权限
+    permissions:
+      contents: write
+
     steps:
-      # 第 1 步：下载代码
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # 第一步：检出仓库代码，以便访问模板文件并提交更改
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
 
-      # 第 2 步：列出文件（用于调试）
-      - name: List files in the repository
-        run: ls -R
+      # 第二步：下载最新的 IPTV 源文件
+      - name: 下载源 IPTV 文件
+        run: curl -s -o source.m3u https://sub.ottiptv.cc/iptv.m3u
 
-      # 第 3 步：下载最新的 m3u 文件
-      - name: Download latest IPTV m3u file
-        run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
-
-      # ====================================================================
-      # === 关键修复：这是之前缺失的步骤，是导致错误的根本原因 ===
-      # === 这个步骤必须在 "Update playlist" 步骤之前               ===
-      # ====================================================================
-      # 第 4 步：创建输出目录
-      - name: Create output directory
-        run: mkdir -p m3u
-
-      # 第 5 步：运行更新脚本
-      - name: Update playlist from template
+      # 第三步：核心步骤，使用 awk 脚本根据模板生成新的 IPTV 文件
+      - name: 根据模板生成 IPTV 文件
         run: |
-          # 脚本本身现在是完全正确的，无需再修改
-          TEMPLATE_FILE="iptv_template/IPTV_Template.m3u"
-          OUTPUT_FILE="m3u/IPTV_Simple.m3u"
-          DOWNLOADED_FILE="downloaded_iptv.m3u"
-          NEW_LINKS_FILE="new_links.txt"
-          
-          if [ ! -f "$TEMPLATE_FILE" ]; then
-            echo "Error: Template file '$TEMPLATE_FILE' not found."
-            exit 1
-          fi
+          # 确保输出目录存在
+          mkdir -p m3u
 
-          grep '^http' "$DOWNLOADED_FILE" > "$NEW_LINKS_FILE" || true
+          # 使用 awk 脚本进行处理
+          # 脚本逻辑：
+          # 1. 首先读取 source.m3u 文件，将 "频道名" 和 "URL" 的对应关系存入一个名为 urls 的数组。
+          # 2. 然后读取模板文件 IPTV_Template.m3u。
+          # 3. 遍历模板文件，当遇到一个频道时，就去 urls 数组里查找新的 URL。
+          # 4. 如果找到了，就用新的 URL 替换掉模板中的旧 URL；如果没找到，就保留原来的。
+          awk '
+            # BEGIN 块在处理任何文件之前运行，这里用来设置分隔符
+            BEGIN {
+              FS = ","
+            }
 
-          mapfile -t new_urls < "$NEW_LINKS_FILE"
-          new_url_index=0
-          
-          TEMP_OUTPUT_FILE=$(mktemp)
+            # FNR==NR 这个条件只在读取第一个文件 (source.m3u) 时为真
+            FNR==NR {
+              # 如果当前行是频道信息行 (#EXTINF)
+              if ($0 ~ /^#EXTINF/) {
+                # 频道名是最后一个字段
+                channel_name = $NF
+                # 去除可能存在的前后空格
+                gsub(/^[ \t]+|[ \t]+$/, "", channel_name)
+                # 读取下一行，即 URL
+                getline url
+                # 如果频道名不为空，就存入数组
+                if (channel_name != "") {
+                  urls[channel_name] = url
+                }
+              }
+              # 跳过后续处理，继续读取 source.m3u 的下一行
+              next
+            }
 
-          while IFS= read -r line || [[ -n "$line" ]]; do
-            if [[ $line == http* ]]; then
-              if [ $new_url_index -lt ${#new_urls[@]} ]; then
-                echo "${new_urls[$new_url_index]}" >> "$TEMP_OUTPUT_FILE"
-                ((new_url_index++))
-              else
-                echo "$line" >> "$TEMP_OUTPUT_FILE"
-              fi
-            else
-              echo "$line" >> "$TEMP_OUTPUT_FILE"
-            fi
-          done < "$TEMPLATE_FILE"
+            # 这个块在处理第二个文件 (IPTV_Template.m3u) 时运行
+            {
+              # 如果当前行是频道信息行
+              if ($0 ~ /^#EXTINF/) {
+                # 同样的方式获取频道名
+                channel_name = $NF
+                gsub(/^[ \t]+|[ \t]+$/, "", channel_name)
+                # 直接打印这行频道信息
+                print $0
+                # 读取下一行的占位 URL
+                getline placeholder_url
+                # 检查我们的数组里是否有这个频道的新 URL
+                if (channel_name in urls) {
+                  # 如果有，就打印新的 URL
+                  print urls[channel_name]
+                } else {
+                  # 如果没有，就打印原来的占位 URL
+                  print placeholder_url
+                  # 在日志中打印一个警告，方便排查问题
+                  print "警告: 在源文件中未找到频道 [" channel_name "] 的链接" > "/dev/stderr"
+                }
+              } else {
+                # 如果不是频道信息行 (比如文件头)，直接打印
+                print $0
+              }
+            }
+          ' source.m3u iptv_template/IPTV_Template.m3u > m3u/IPTV.m3u
 
-          mv "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE"
-          echo "Playlist updated and saved to $OUTPUT_FILE"
+          echo "IPTV 文件已根据模板成功生成到 m3u/IPTV.m3u"
 
-      # 第 6 步：提交并推送代码
-      - name: Commit and push changes
+      # 第四步：将生成的文件提交到仓库
+      - name: 提交并推送文件
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # 配置 git 用户信息
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           
-          git add m3u/IPTV_Simple.m3u
+          # 将生成的文件添加到暂存区
+          git add m3u/IPTV.m3u
           
+          # 检查是否有文件变动，只有在有变动时才执行提交
           if git diff --staged --quiet; then
-            echo "No changes to commit. Working tree clean."
+            echo "文件内容无变化，无需提交。"
           else
-            git commit -m "Update IPTV playlist (m3u/IPTV_Simple.m3u)"
+            git commit -m "feat: 自动更新 IPTV 列表 ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
             git push
           fi
