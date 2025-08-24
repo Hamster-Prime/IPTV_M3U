@@ -48,7 +48,7 @@ jobs:
           # 逐行读取模板文件并进行替换
           while IFS= read -r line || [[ -n "$line" ]]; do
             if [[ $line == http* ]]; then
-              # 如果新链接数组中还有未使用的链接，则进行替换
+              # 如果新链接数组中还有未使用的链接，则进行替换 (使用正确的数组长度语法)
               if [ $new_url_index -lt ${#new_urls[@]} ]; then
                 echo "${new_urls[$new_url_index]}" >> "$TEMP_OUTPUT_FILE"
                 ((new_url_index++))
