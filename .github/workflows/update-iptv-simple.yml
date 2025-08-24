@@ -1,9 +1,9 @@
-name: 自动更新 IPTV 精简源
+name: Update IPTV Playlist
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 允许手动触发
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 每天 UTC 时间 0 点运行 (北京时间早上8点)
 
 jobs:
   update-playlist:
@@ -12,44 +12,57 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: List files in the repository # <-- 新增的调试步骤
+        run: ls -R
+
       - name: Download latest IPTV m3u file
         run: curl -sL -o downloaded_iptv.m3u https://sub.ottiptv.cc/iptv.m3u
 
       - name: Create output directory
-        run: mkdir -p m3u
+        run: mkdir -p m3u # 确保 m3u 文件夹存在
 
       - name: Update playlist from template
         run: |
+          # 定义输入和输出文件路径
           TEMPLATE_FILE="iptv_template/IPTV_Template.m3u"
           OUTPUT_FILE="m3u/IPTV_Simple.m3u"
           DOWNLOADED_FILE="downloaded_iptv.m3u"
           NEW_LINKS_FILE="new_links.txt"
           
+          # 检查模板文件是否存在
           if [ ! -f "$TEMPLATE_FILE" ]; then
             echo "Error: Template file '$TEMPLATE_FILE' not found."
             exit 1
           fi
 
+          # 提取下载文件中的视频链接
           grep '^http' "$DOWNLOADED_FILE" > "$NEW_LINKS_FILE"
 
+          # 读取新链接到数组中
           mapfile -t new_urls < "$NEW_LINKS_FILE"
           new_url_index=0
           
+          # 创建一个临时的输出文件
           TEMP_OUTPUT_FILE=$(mktemp)
 
+          # 逐行读取模板文件并进行替换
           while IFS= read -r line || [[ -n "$line" ]]; do
             if [[ $line == http* ]]; then
+              # 如果新链接数组中还有未使用的链接，则进行替换
               if [ $new_url_index -lt ${#new_urls[@]} ]; then
                 echo "${new_urls[$new_url_index]}" >> "$TEMP_OUTPUT_FILE"
                 ((new_url_index++))
               else
+                # 如果新链接已经用完，保留模板中的旧链接
                 echo "$line" >> "$TEMP_OUTPUT_FILE"
               fi
             else
+              # 如果不是链接行，直接写入新文件
               echo "$line" >> "$TEMP_OUTPUT_FILE"
             fi
           done < "$TEMPLATE_FILE"
 
+          # 用更新后的文件覆盖最终的目标文件
           mv "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE"
           echo "Playlist updated and saved to $OUTPUT_FILE"
 
