@@ -85,6 +85,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "文件内容无变化，无需提交。"
           else
-            git commit -m "feat: 自动更新 IPTV 列表 (Simple) ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
+            git commit -m "feat: 自动更新 IPTV 源 (Simple) ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
             git push
           fi
