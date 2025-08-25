@@ -43,7 +43,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "没有检测到文件变动，无需提交。"
           else
-            git commit -m "chore: 自动更新 IPTV源 ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
+            git commit -m "feat: 自动更新 IPTV源 ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
             git push
           fi
 
