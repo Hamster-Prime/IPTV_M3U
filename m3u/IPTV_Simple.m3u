@@ -1,40 +1,40 @@
 #EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://live.fanmingming.com/tv/CCTV1.png" group-title="央视频道",CCTV-1 综合
-https://mursor.ottiptv.cc/migu/608807420.m3u8?migutoken=156ed4b84eaf5b856ac23171cae821e0977a30fa33445c4c2f49ced92a641afd7b1412afa30df78817e85f6e404482c382168e986b2619c490dac6c799967f9036824e361995351949e59cea10
+https://mursor.ottiptv.cc/migu/608807420.m3u8?migutoken=506d5f1395a4fdfffeb3a4690f9f658aef138b9ce14e37f41a7e10d01a96927b9ef4159daf0d046f6cbe56fab0c869b212bc87337d57e8e0f975df8592d0648565d40e6aefe201ab1f132c8ebf
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://live.fanmingming.com/tv/CCTV2.png" group-title="央视频道",CCTV-2 财经
-https://mursor.ottiptv.cc/migu/631780532.m3u8?migutoken=8fa585db3c67670cbc4a67d072f0f6439761c39f0c5554692d39ea85b2c1a731c19508e33bb9fcf1c1d24540a3506c392c373e77a74d22693490887d6d1c9da4628ef57fe663b88407f3b7bb3a
+https://mursor.ottiptv.cc/migu/631780532.m3u8?migutoken=612e214429ac7d4c250a82717d7133e3a1c4b2dfbc81b796ea71a4e5587586780257f2a4a204761fd2ce66ffea61062ad1abe949ad3a6aaffe1957e176c6ffabec81f16891fb45bade553d7288
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://live.fanmingming.com/tv/CCTV3.png" group-title="央视频道",CCTV-3 综艺
-https://mursor.ottiptv.cc/migu/624878271.m3u8?migutoken=db467604ab3fb2a864e849d49a7e1bafff68e7bfb8bee9ccb4dd2251f530f973d06a93f2ab1f330e2e11dff4a87a96bc40364e9a6e7a123dbe0a351c83f1d4a9508a5a4dbe83969bd75747a596
+https://mursor.ottiptv.cc/migu/624878271.m3u8?migutoken=172ad8e5c1ae9a8e46c07ce6a072d2dca273c36178579c283293a3e21eb08bb94ab846baa86e79e0270eafe1374c2d9b4edbef839d34a73c1b49291f7fcb99fbe1372c456dfabf1d2dac814f0a
 #EXTINF:-1 tvg-id="CCTV4" tvg-name="CCTV4" tvg-logo="https://live.fanmingming.com/tv/CCTV4.png" group-title="央视频道",CCTV-4 中文国际
-https://mursor.ottiptv.cc/migu/631780421.m3u8?migutoken=2412941bc1f48bcb09205faa48577d8e6715069e6390cb7e18f7b7e52fea3ecc80919afe8a81d1db24121ce91aac599570c62e84cef92c676a02fbd5a6e21a5e5de32d14243559a8a54b47934e
+https://mursor.ottiptv.cc/migu/631780421.m3u8?migutoken=0ab731fc97a40439557fecc600f905d67bfc49ad7fc7faf3acce2c8bd27241f612dc8aa8b0d55d864094e2ac93907d2f187fcc1faeaf8f7019d10eea113efbe166ec7a687118d53a3e3ddc7fb5
 #EXTINF:-1 tvg-id="CCTV5" tvg-name="CCTV5" tvg-logo="https://live.fanmingming.com/tv/CCTV5.png" group-title="央视频道",CCTV-5 体育
-https://mursor.ottiptv.cc/migu/641886683.m3u8?migutoken=e73c6da1a4814b2c1e7be679dadb729d6b2459e37f068b855a3e0b55cc2075945c5d624aefcd15410b1e14f809e2ce2e52529db3d438273f240d2437f6d42c675c5f53245484c65c0ad6f477d2
+https://mursor.ottiptv.cc/migu/641886683.m3u8?migutoken=2f66f2e3768420eb6cf7bfd059c935ec048ae36e5a440abbb22a8957ae64387ef0a05e8852dd3835f35ce58c805ef6c05d70dd5c2349aa2c4859596c4fcbbb8b8086b2fb0eaaa66ae28fe20075
 #EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV5+" tvg-logo="https://live.fanmingming.com/tv/CCTV5+.png" group-title="央视频道",CCTV-5+ 体育赛事
-https://mursor.ottiptv.cc/migu/641886773.m3u8?migutoken=d3df12acf912c30edb6ea038be91d8a0f35cf8eb7a98a7128e7cbae2bc1cfab44b48b60db079631fb370677fa7a6e3b91bd547dc1e4746d32ab216c939c942c1bd7cabcd1a4ee0fd33c0bf8f96
+https://mursor.ottiptv.cc/migu/641886773.m3u8?migutoken=5be7ccbff1f7481f9d906e330feb6233e0de956c7a1ed4507d47bbd18c825b0d8a62c4304e60867f849ce96b97bc3ab44f0e910bac2220600674a69dcb7bba913c965b96db0a1218f091c603d3
 #EXTINF:-1 tvg-id="CCTV6" tvg-name="CCTV6" tvg-logo="https://live.fanmingming.com/tv/CCTV6.png" group-title="央视频道",CCTV-6 电影
-https://mursor.ottiptv.cc/migu/624878396.m3u8?migutoken=56e89392598fad3bd6b57198e6cca3c9e0436236a4538900bb582e18d74adc02c9a89e6c3a1b3517bfae36c6276c769daf34d24eabbfb66353f6c72a17c9e33bcfc33cd2a29425150c6a2d19be
+https://mursor.ottiptv.cc/migu/624878396.m3u8?migutoken=2bee516601aa3ba2653a89d96cccd05a1ac8394f41344e16cf8f44163679e19fefbb142a41f0d547f86436817c693ee661e55ed2173220de8a053228874d0f02d201f1bade34b40fd8c58cb661
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://live.fanmingming.com/tv/CCTV7.png" group-title="央视频道",CCTV-7 国防军事
-https://mursor.ottiptv.cc/migu/673168121.m3u8?migutoken=a7f0467b529da111fed096d470e4b247a0523f67520a45f931c9ec25ad9acaf2e4883ffdd5e931177486d872c394d12eeec08d2c242bea7bcc0e6135b013146ec6da3e97273adca6ed33d75264
+https://mursor.ottiptv.cc/migu/673168121.m3u8?migutoken=7267c6c160fa2190980afea5ca94c25a5f81a13fe7c8a6a2022770d7d05e87aac3ffe80f7c8d83f19d620b4678e1e2365efa528ca41989ca8166d73c2a91a1ce40c332a1df8543ac677563fce7
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://live.fanmingming.com/tv/CCTV8.png" group-title="央视频道",CCTV-8 电视剧
-https://mursor.ottiptv.cc/migu/624878356.m3u8?migutoken=e599ec4aaf0494d5931b0ca7bc8799c44006b64b6d1e581a52602b08c79b470328e84364dc03a4735451b24db2d087fe4e24d47d21f9e8976ee8ff56e9444479e58299db101657de5b8319d6da
+https://mursor.ottiptv.cc/migu/624878356.m3u8?migutoken=5076e22150c601adbf220f74c822adf67baef7a969423c97f60fb2bf7614410e109cee76c0e408723af26214ac7a8e218bb2b052b4c944ab89379686e8e4484a43ee7d244afe4004109e236ce1
 #EXTINF:-1 tvg-id="CCTV9" tvg-name="CCTV9" tvg-logo="https://live.fanmingming.com/tv/CCTV9.png" group-title="央视频道",CCTV-9 纪录
-https://mursor.ottiptv.cc/migu/673168140.m3u8?migutoken=f2f0a4882e1e43b7b3484130834902ee59c14a42b7e01b04c532569ac8fbf2287bd814d48d0075bce53cfcc051010e18cfe40de0dea63b794cadf04b4430b5b89f3025ed239aed3a9b111bd80a
+https://mursor.ottiptv.cc/migu/673168140.m3u8?migutoken=f295c79d622bf002f2b5808a4c55531f107fc19c370ad756f38a0020423bb612f593ab165304086c6b598ee6306a6c8fb0e3ed50a6674557704df971fbe136cc7978606b6051b88dbd4a52585d
 #EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://live.fanmingming.com/tv/CCTV10.png" group-title="央视频道",CCTV-10 科教
-https://mursor.ottiptv.cc/migu/624878405.m3u8?migutoken=49b4a0bd97a9465f0e16c22004d205bfadf06267456b1a44e8eb6e539b8fe7628500fc78f5664d9a2dcb0a7d360ef473bfb3b4565b90fd5f7c6c0aee00d8709a6365700c00fc5765ebe511b329
+https://mursor.ottiptv.cc/migu/624878405.m3u8?migutoken=248b0082f59b2c26e72c30116ad0ea3a12c5a0196a3f68a8de0ce0c42da25b30240679c30a1627f1bf5db54b908ff3c9aa2bf0f399d9365abe8d996fd74bf913490053e2258dda7c9ff5251613
 #EXTINF:-1 tvg-id="CCTV11" tvg-name="CCTV11" tvg-logo="https://live.fanmingming.com/tv/CCTV11.png" group-title="央视频道",CCTV-11 戏曲
-https://mursor.ottiptv.cc/migu/667987558.m3u8?migutoken=710d3ae1c016b3c840cff11804f8e81d5fb2f3619e917230064d60d5c2ef0ef9d3b344993386a5d46a0896e4788446da03ac6e3d3a471e74b8d5e64cd608c411007506e6d6f1ac4c954dfad292
+https://mursor.ottiptv.cc/migu/667987558.m3u8?migutoken=708a771f9489a542d4138a6ab9fbef1a41b6c3dc17a96cd515bcb2e4cae065feb1f96c57253169088a2929661e19d1fa617d3dd95031b5985af0dd2d2537c94227cb4114afb152403d7d2db3b5
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://live.fanmingming.com/tv/CCTV12.png" group-title="央视频道",CCTV-12 社会与法
-https://mursor.ottiptv.cc/migu/673168185.m3u8?migutoken=dbe9897791ac169a695f4772103fa6d35570d1d0c883f4c269ee2710c0f635779b6424ad7420711017fb1a346d97789bd1222a345dfd4c2655fec4d2a24152642cbc3f57a072e55bdd23b803eb
+https://mursor.ottiptv.cc/migu/673168185.m3u8?migutoken=d1fbfad215a0e6d18660b1cb1f794ab585c5674db0daf4faf02842fd179f7c4cbaa0c5165c0264b4055a1721b1a7be6a37fb2418a6e54927cad59c0455d977279e4585c53cfbedc5990aea2cec
 #EXTINF:-1 tvg-id="CCTV13" tvg-name="CCTV13" tvg-logo="https://live.fanmingming.com/tv/CCTV13.png" group-title="央视频道",CCTV-13 新闻
-https://mursor.ottiptv.cc/migu/608807423.m3u8?migutoken=d5ef5300e74fc38bc7cc8bf1f305b8200e0d235d1641e44bf07fba0fc0046e58e9bea0493a054d3fb0daaec1a307756c5a74306222caeb74b2298b9a47828b09d33809cea4115a2a8a3a6c4912
+https://mursor.ottiptv.cc/migu/608807423.m3u8?migutoken=a0b686164dc4534ad53a4e94fa9c5cef2985aac9581021cf9a083849ea8b7737944fc192897da99075eed69ae85e8c1b16c9718c22cb003df683b3ec9a8703d0c897ba8cb34c1a94414e29b0bc
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://live.fanmingming.com/tv/CCTV14.png" group-title="央视频道",CCTV-14 少儿
-https://mursor.ottiptv.cc/migu/624878440.m3u8?migutoken=1b1a5a59541fd99da69a8f7772b690c93a84d99ecc5279d88ec9a7bda4e6cb8cfc7e0bd8c512931b59f78497eeea9e316221af142eba9524b59b090abfa582f9dc9c703ab5298015b95169f2dd
+https://mursor.ottiptv.cc/migu/624878440.m3u8?migutoken=48cc8b5a5df1a17bc99c00e20206f3f27dc707f5fc9fb9a919d5c58bb26f98037f0235cc91514a58157dfe9ca381c7a6326abd3159c94c8a5a4f3bc2ff4869a5b499f72f586db7443920b91785
 #EXTINF:-1 tvg-id="CCTV15" tvg-name="CCTV15" tvg-logo="https://live.fanmingming.com/tv/CCTV15.png" group-title="央视频道",CCTV-15 音乐
-https://mursor.ottiptv.cc/migu/673168223.m3u8?migutoken=d942dc5b1190acabbd5d62bdc11b2a4a52a64dd9194b40331492868ea88404d6800a9e14730e39e88e84c5261608daae82cb82201bd3d8d2b4ec548ae4e6c34a239266fbf70fd48433911c5444
+https://mursor.ottiptv.cc/migu/673168223.m3u8?migutoken=8be7ea40eccced285f6f2bb77aa0bd5e5ec064b5c9afe3c3490468eaf956be701326a5143960480e7dea7887b77978dd98ba702801358e67e02b209ee66eb3d6dc62d50e9ced361212765f38c8
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://live.fanmingming.com/tv/CCTV16.png" group-title="央视频道",CCTV-16 奥林匹克
 http://172.31.0.2:7088/rtp/172.31.0.2:7088
 #EXTINF:-1 tvg-id="CCTV17" tvg-name="CCTV17" tvg-logo="https://live.fanmingming.com/tv/CCTV17.png" group-title="央视频道",CCTV-17 农业农村
-https://mursor.ottiptv.cc/migu/673168256.m3u8?migutoken=2466a10f369f37b6c745c075a5680588e719357e53933d2cb6ae21e5fee723b709cf54b61ae8c03ab865d86f9b1a63316aebcd1c07132c809480d321f906d5b36bf5ffa75e6832abcc940c1385
+https://mursor.ottiptv.cc/migu/673168256.m3u8?migutoken=4ee37e162f22c388bf0fb5c714dafddcd02934c54e2829e73885389cff1e9b5a070e43758abdee9e1220fd95dc3ce75d7c6a61777be9bfb17b374982fdf6f05835a8c530fd6394c0a4872d9a05
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://live.fanmingming.com/tv/山西卫视.png" group-title="卫视频道",山西卫视
 https://mursor.ottiptv.cc/mcp/shanxi.m3u8
 #EXTINF:-1 tvg-id="湖南卫视" tvg-name="湖南卫视" tvg-logo="https://live.fanmingming.com/tv/湖南卫视.png" group-title="卫视频道",湖南卫视
@@ -44,7 +44,7 @@ https://mursor.ottiptv.cc/mcp/zhejiang.m3u8
 #EXTINF:-1 tvg-id="安徽卫视" tvg-name="安徽卫视" tvg-logo="https://live.fanmingming.com/tv/安徽卫视.png" group-title="卫视频道",安徽卫视
 https://mursor.ottiptv.cc/mcp/anhui.m3u8
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://live.fanmingming.com/tv/广东卫视.png" group-title="卫视频道",广东卫视
-https://mursor.ottiptv.cc/migu/608831231.m3u8?migutoken=2bd5491fa0e7d7b90d126618fbc3ff5c5c6d5e6855d7fb8bab085fd44a40229a5a7a964418fc33c22ffbea5efe582faff3c82ac0fd5205885401e896001c851544cd2a0b500fda50f03e50c368
+https://mursor.ottiptv.cc/migu/608831231.m3u8?migutoken=4be974aa6ca889a5d1d0919fc46374096456dd394f48eb60d31bccf7aa6d0d65f6212567a23a91a52d39f77a38a4792b11995d2acde6e6699c9c39158949f8e551623c2ecfbc0683935b5aba54
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://live.fanmingming.com/tv/深圳卫视.png" group-title="卫视频道",深圳卫视
 https://mursor.ottiptv.cc/mcp/shenzheng.m3u8
 #EXTINF:-1 tvg-id="天津卫视" tvg-name="天津卫视" tvg-logo="https://live.fanmingming.com/tv/天津卫视.png" group-title="卫视频道",天津卫视
@@ -52,7 +52,7 @@ https://mursor.ottiptv.cc/mcp/tianjing.m3u8
 #EXTINF:-1 tvg-id="山东卫视" tvg-name="山东卫视" tvg-logo="https://live.fanmingming.com/tv/山东卫视.png" group-title="卫视频道",山东卫视
 https://mursor.ottiptv.cc/mcp/shandong.m3u8
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://live.fanmingming.com/tv/湖北卫视.png" group-title="卫视频道",湖北卫视
-https://mursor.ottiptv.cc/migu/947472496.m3u8?migutoken=28338ea91aabaa7746679b79189198f86450873b9ddc0759a05c6342613eac86b4a9a2b11df91b3680fe8ad29ddc4a3f98aae1492afb59a665aa3fdc6b8e4b9ae87a996f4b7578ffd6930abc5b
+https://mursor.ottiptv.cc/migu/947472496.m3u8?migutoken=bcb2afc893f89d88e9033d46c360090642d155b99db8e7af2fe808af796d24ee31cf3c9cd730d474f1bfecca953c0f0b7409d6ec951f072f51a7cbf6f07d077f2ee45475bd42ccf9d519f0ae58
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://live.fanmingming.com/tv/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
 https://mursor.ottiptv.cc/mcp/heilongjiang.m3u8
 #EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://live.fanmingming.com/tv/辽宁卫视.png" group-title="卫视频道",辽宁卫视
@@ -60,9 +60,9 @@ https://mursor.ottiptv.cc/mcp/liaoning.m3u8
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://live.fanmingming.com/tv/重庆卫视.png" group-title="卫视频道",重庆卫视
 https://mursor.ottiptv.cc/mcp/chongqing.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.fanmingming.com/tv/东方卫视.png" group-title="卫视频道",东方卫视
-https://mursor.ottiptv.cc/migu/651632648.m3u8?migutoken=f5cef18086f578d7631e837168728eb329258070f9cc3ce1d8c9b52ba17bdbaa2ffc35fc6dc617d7baf76b750aaa12a0532c7b3151a926a126a73d4514d494968e17d385a6ee51c0f66b2ec015
+https://mursor.ottiptv.cc/migu/651632648.m3u8?migutoken=c6c8bf6c738316f6f13f462932a880997d68bfc9945a3a3045151e6eeba62f4f12e8f626bb9f7b43fc05f3271e5cd67b1ab51a21a7ae7a996b50166cd488cf9a5792ac5e11cf9f05354d21d743
 #EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://live.fanmingming.com/tv/江苏卫视.png" group-title="卫视频道",江苏卫视
-https://mursor.ottiptv.cc/migu/623899368.m3u8?migutoken=2a182317e0fe368cb907419c021a2ed01db6dba694c7393011ac7a7382d12c2c73b97660b06f04e5e7b77721a7d504e9e7df6be107cbe6f718b95fd76fcbb2250ffab0c442da5b5dd2d9854d0c
+https://mursor.ottiptv.cc/migu/623899368.m3u8?migutoken=a5d1525262a331ee8264b6dc3e05251b9dd97d28bd363b6d23fb2cbcb1f78bd1ceeddb9aa3f99a025dcb0a9ba362eba74225d27a2e995636fb2bc8b32c1cd459b1d8ef2e51be3765614fa81204
 #EXTINF:-1 tvg-id="北京卫视" tvg-name="北京卫视" tvg-logo="https://live.fanmingming.com/tv/北京卫视.png" group-title="卫视频道",北京卫视
 https://mursor.ottiptv.cc/mcp/beijing.m3u8
 #EXTINF:-1 tvg-id="河北卫视" tvg-name="河北卫视" tvg-logo="https://live.fanmingming.com/tv/河北卫视.png" group-title="卫视频道",河北卫视
@@ -72,16 +72,16 @@ https://mursor.ottiptv.cc/mcp/sichuan.m3u8
 #EXTINF:-1 tvg-id="贵州卫视" tvg-name="贵州卫视" tvg-logo="https://live.fanmingming.com/tv/贵州卫视.png" group-title="卫视频道",贵州卫视
 https://mursor.ottiptv.cc/mcp/guizhou.m3u8
 #EXTINF:-1 tvg-id="东南卫视" tvg-name="东南卫视" tvg-logo="https://live.fanmingming.com/tv/东南卫视.png" group-title="卫视频道",东南卫视
-https://mursor.ottiptv.cc/migu/849116810.m3u8?migutoken=e85c60416284c0890d803d9f181113499ec91f5375176549abb3398a5bad20d4817f44a493101bd7437d94e31b8d718164315651df8777b9ed1da8c896e430a4d151a612c32cb4bf77d08f6ae8
+https://mursor.ottiptv.cc/migu/849116810.m3u8?migutoken=31e95d66d2b80c2b3917880c408a0268dafd20d61afdaf16f466665d3975e0154b22d791663d68511a60545a09fbadfd6076c001060d2a7e064b5556eafd75b6c45273ba5689d1f44e3060e999
 #EXTINF:-1 tvg-id="河南卫视" tvg-name="河南卫视" tvg-logo="https://live.fanmingming.com/tv/河南卫视.png" group-title="卫视频道",河南卫视
-https://mursor.ottiptv.cc/migu/790187291.m3u8?migutoken=140c3c91b9dc23f1cc2be77ab3a08e5ede7205bea64f7b661a67bc9b42cc1fe3e0a1786c8f43f916806db36df076e418581fcdbd1c76d24642f8691f25072d2883e148ce6c238cf5c0e8451e90
+https://mursor.ottiptv.cc/migu/790187291.m3u8?migutoken=063608095c424e81c4eba2033376c2c5d7341ba47823da39e96a4f90a9e8467ece0d88f1b1558cdd9fb2e22d44bf6d5a9d09747e0d80b031052e493e69a9d14ae41227fa22981c92d22bd0341c
 #EXTINF:-1 tvg-id="江西卫视" tvg-name="江西卫视" tvg-logo="https://live.fanmingming.com/tv/江西卫视.png" group-title="卫视频道",江西卫视
-https://mursor.ottiptv.cc/migu/783847495.m3u8?migutoken=cf7de88cca4ed47359df3c826d72b11707a1a37216a06a74b149a5654b273346a9d8f602cc890d3e92793824047f8208677ed57866b8a137ce5815fb874d9021f29e431bf7c0c5c2d1a3dd77a1
+https://mursor.ottiptv.cc/migu/783847495.m3u8?migutoken=f065d0b09a2ba707dbcd323ca098f0e23bb2ab3524ea563a15d2a5405e8727498b1ffba9c94ee14d11b9d99bb90b2d2ac7ebdefce9a2268536b016e12ddab4385e177fcfab9285059875cbecca
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://live.fanmingming.com/tv/吉林卫视.png" group-title="卫视频道",吉林卫视
-https://mursor.ottiptv.cc/migu/947472500.m3u8?migutoken=8b082f75ec4d9827f45028253943ffdd8e554c91854f6f4f686431ba8aace1e58825f8b4386519402ef1dc013c170c1dd0453b460ddd586b3d5639f4bee55dd1a64d93acc924902cb7f9bd9d06
+https://mursor.ottiptv.cc/migu/947472500.m3u8?migutoken=aba8a0ecd9984ed932809294db3a4be29c0fac630307f4da9004ac7a8b6a19c90e5e5d820fb97123223a389aeee27fcf0ee05fece2d3b6d0f0eec828de97ffc602a7f8c6c766cdc5cbe9062297
 #EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://live.fanmingming.com/tv/广西卫视.png" group-title="卫视频道",广西卫视
 https://mursor.ottiptv.cc/mcp/guangxi.m3u8
 #EXTINF:-1 tvg-id="云南卫视" tvg-name="云南卫视" tvg-logo="https://live.fanmingming.com/tv/云南卫视.png" group-title="卫视频道",云南卫视
 https://mursor.ottiptv.cc/mcp/yunnan.m3u8
 #EXTINF:-1 tvg-id="海南卫视" tvg-name="海南卫视" tvg-logo="https://live.fanmingming.com/tv/海南卫视.png" group-title="卫视频道",海南卫视
-https://mursor.ottiptv.cc/migu/947472502.m3u8?migutoken=a65056b07da18fe717f5cba2d92bee1b5f630f570395bd9259a9d22a6213f90cc614f25ee97401b4d523dafe05aa996ed96c1ada427b1b13ea44d142e625bf47379d1dba2a4840402fff97f81c
+https://mursor.ottiptv.cc/migu/947472502.m3u8?migutoken=32a1883c76261ad5ba1b2d4cd7f3e23e689216c5bb715ac769ec5bc901104ecf2c110e80b58990895edbacf30453aeb8697a574c7ccab00a4f7b0e48318adaeedf0dbf5af7f67963da648e70b3
